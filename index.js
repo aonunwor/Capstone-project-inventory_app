@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 
 app.get('/', (req, res)=>{
     res.status(200);
-    res.send(`Inventory_app Home page`)
+    res.send(`Welcome to my Inventory_app home page`)
     res.end();
 })
 
