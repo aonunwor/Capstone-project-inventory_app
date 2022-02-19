@@ -4,10 +4,15 @@ const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({extended: true}));
+
 
 app.get('/', (req, res)=>{
     res.status(200);
-    res.send(`Welcome to my Inventory_app home page`)
+    res.render(`pages/home`)
     res.end();
 })
 
