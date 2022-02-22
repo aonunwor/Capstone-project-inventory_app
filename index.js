@@ -16,7 +16,12 @@ app.get('/', (req, res)=>{
     res.end();
 })
 
-
+//To register
+app.get('/register', (req,res)=>{
+        res.status(200);
+        res.render(`pages/register`);
+        res.end();
+})
 
 const PORT = process.env.PORT || 3030;
 app.listen(PORT, ()=>{

@@ -1,6 +1,39 @@
+html,body{
+        height: 100%;
+}
+
+
+
 .bg-text{
         margin-top: 20%;
 }
 .bg-text p{
     font-size: 1.5em;
+}
+
+
+.reg{
+    height: 100%;
+    background-image: url('../../images/pencil.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.form{
+        background-color: #fff;
+        max-width: 90%;
+        margin-top: 2rem;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        padding: 2rem;
+}
+
+@media screen and (min-width:1300px){
+    .form{
+        background-color: #fff;
+        max-width: 50%;
+    }
 }
