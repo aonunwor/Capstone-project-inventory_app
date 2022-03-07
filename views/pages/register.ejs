@@ -29,13 +29,13 @@
 <!--FORM-->
             <div class="container-fluid form">
                 <h4>Register and become a part of our community</h4>
-                <form action="" method="post">
+                <form action="/register" method="post">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="First name" name="First name" required>
+                                <input type="text" class="form-control" placeholder="First name" name="Firstname" required>
                               </div>
                               <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Last name" name="Last name" required>
+                                <input type="text" class="form-control" placeholder="Last name" name="Lastname" required>
                               </div>
                               <div class="col-md-6">
                                 <input type="text" class="form-control" placeholder="Email" name="Email" required>
@@ -82,10 +82,10 @@
                                 <input type="text" class="form-control" placeholder="Country" name="Country" required>
                               </div>
                               <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Password" name="Password" required>
+                                <input type="password" class="form-control" placeholder="Password" name="Password" required>
                               </div>
                               <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="ConfirmPassword" name="ConfirmPassword" required>
+                                <input type="password" class="form-control" placeholder="ConfirmPassword" name="ConfirmPassword" required>
                               </div>
                               <div class="col-md-12">
                                 <input class="form-check-input" type="radio" name="IAgree" id="IAgree">
@@ -94,7 +94,7 @@
                                 <div class="col-md-12 mt-2">
                                     <button type="submit" class="btn btn-sm btn-primary">Register</button>
                             </div> 
-                            <p class="text-center">If you already have an account please <a href="#">login</a></p>
+                            <p class="text-center">If you already have an account please <a href="/login">login</a></p>
                         </div>
                 </form>
             </div>
