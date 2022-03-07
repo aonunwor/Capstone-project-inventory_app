@@ -19,11 +19,11 @@ const userSchema = new Schema(
                 },
                 PhoneNumber:{
                     type: Number,
-                    required: true,
+                    maxlength: 11
                 },
                 Gender:{
                     type: String,
-                    //enum: [`Male`, `Female`, `Dash`]
+                    enum: [`Male`, `Female`, `Dash`]
                 },
                 DOB:{
                     type: Date,

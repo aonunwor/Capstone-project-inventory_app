@@ -66,7 +66,7 @@ app.post('/register', async(req,res) =>{
 
                         const registered = await registerUser.save();
                         res.status(201);
-                        res.render('pages/login');
+                        res.send(req.body.Firstname);
                         res.end();     
                 }else{
                         const script = `<script>alert("Both passwords do not match").window.location.href = "/register"</script>`;
