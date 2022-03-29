@@ -16,12 +16,15 @@ app.use(express.urlencoded({extended: true}));
 
 main().catch(err =>{
         console.log("OH NO MONGO CONNECTION ERROR!!!");
-        console.log(err);
+        console.log(err); 
 });
 
 async function main(){
-        await mongoose.connect('mongodb://localhost:27017/purchaseDB', {useNewUrlParser: true, useUnifiedTopology:true})
-};
+        await mongoose.connect('mongodb+srv://dbAcho2:dbColours1@cluster0.snmtt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
+        {useNewUrlParser: true, useUnifiedTopology:true}, ()=>{
+                console.log("connected");
+        }
+)};
 
 app.get('/', (req, res)=>{
     res.status(200);
@@ -48,12 +51,18 @@ app.post('/register', async(req,res) =>{
         try{
                 const password = req.body.Password;
                 const cpassword = req.body.ConfirmPassword;
-                if(password === cpassword){
+                const email = req.body.Email;
+                const usedemail = User.findOne({Email: email});
 
+                if(password === cpassword){
+                        if(email === usedemail){
+                                const script = `<script>alert("Email has already been used"); window.location.href="/register"</script>`;
+                                res.send(script);
+                        }else{
                         const registerUser = new User({
                                 Firstname : req.body.Firstname,
                                 Lastname : req.body.Lastname,
-                                Email : req.body.Email,
+                                Email : email,
                                 PhoneNumber : req.body.PhoneNumber,
                                 Gender : req.body.Gender,
                                 DOB : req.body.DOB,
@@ -66,8 +75,9 @@ app.post('/register', async(req,res) =>{
 
                         const registered = await registerUser.save();
                         res.status(201);
-                        res.send(req.body.Firstname);
-                        res.end();     
+                        res.render(`pages/login`);
+                        res.end();
+                        }     
                 }else{
                         const script = `<script>alert("Both passwords do not match").window.location.href = "/register"</script>`;
                         res.send(script);
@@ -78,7 +88,33 @@ app.post('/register', async(req,res) =>{
         }
         
         
-})
+});
+
+//TO LOGIN
+app.post('/login', async(req,res)=>{
+        try{
+                const email = req.body.Email;
+                const password = req.body.Password;
+
+                const useremail = await User.findOne({Email: email});
+
+                const id = req.body._id;
+                const eachUser = User.findById(id);
+
+                if(useremail.Password === password){
+                        res.status(201);
+                        res.send(`<p>Welcome ${useremail.Firstname}, click <a href="#">here</a> to proceed to your dashboard</p>`);
+                        res.end();
+                }else{
+                        res.send("passwords do not match");
+                }
+        }catch(error){
+                res.status(400);
+                res.send("Invalid Email");
+        }
+});
+
+
 const PORT = process.env.PORT || 3030;
 app.listen(PORT, ()=>{
         console.log(`APP is listening on port ${PORT}!`);
