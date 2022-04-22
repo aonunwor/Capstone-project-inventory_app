@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css"> 
+    <title>Welcome <%= eachUser.Firstname %> <%= eachUser.Lastname %> to purchase</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="../images/logo-green.png" alt="purchase logo here" width="150" height="">
+                </a>
+                
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" href="../../login">All products</a>
+                        </div>
+                </div>
+
+                <!--<div>
+                        <a class="btn btn-sm btn-success" href="/register">CREATE YOUR ACCOUNT</a>
+                        <a class="btn btn-sm btn-success" href="/login">LOGIN</a>
+                </div>-->
+
+                <div class="col-md-1 mx-5 col-sm-2 btn-group">
+                    <p class="dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                    </p>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><%= eachUser.Firstname.toUpperCase()%> <%=eachUser.Lastname.toUpperCase()%></a></li>
+                        <li><a class="dropdown-item" href="#">EDITOR</a></li>
+                        <li><a class="dropdown-item" href="../../">LOGOUT</a></li>
+                    </ul>
+                </div>
+
+                <button class="navbar-toggler btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon btn-outline-success"></span>
+                </button>
+            </div>
+      </nav>
+
+    <!--SLIDER--> 
+
+        <div class="container-fluid">
+                <div class="row">
+                        <span class="col-md-6 text-center bg-text">
+                                        <h2>Welcome <%= eachUser.Firstname %></h2>
+                                        
+                                        <a class="btn btn-sm btn-outline-success" href="../../login">Add new products</a>
+                                        <a class="btn btn-sm btn-outline-success" href="../../login">view all products</a>
+                        </span>
+
+                        <img src="../images/bg-img.jpg" alt="homepage image" width="30%" height="600" class="col-md-6 image-fluid float-end">
+                </div>
+
+        </div>
+        <!--PRODUCTS-->
+        <h2 class="text-center mt-5 pt-5">PRODUCTS</h2>
+
+
+
+
+
+        <script language="javascript" type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

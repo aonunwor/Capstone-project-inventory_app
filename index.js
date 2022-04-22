@@ -6,6 +6,8 @@ const methodOverride = require('method-override');
 const { Console } = require('console');
 const bodyParser = require('body-parser');
 const User = require(`./models/user`);
+const req = require('express/lib/request');
+const res = require('express/lib/response');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
@@ -25,18 +27,25 @@ async function main(){
                 console.log("connected");
         }
 )};
-
+//Home page
 app.get('/', (req, res)=>{
     res.status(200);
     res.render(`pages/home`)
     res.end();
 })
 
-//To register
+//Register page
 app.get('/register', (req,res)=>{
         res.status(200);
         res.render(`pages/register`);
         res.end();
+})
+
+//Show logged in page
+app.get('/account/:id/', async (req, res) => {
+        const { id } = req.params;
+        const eachUser = await User.findById(id);
+        res.render(`pages/loggedin`, {eachUser});
 })
 
 //To Login
@@ -103,7 +112,7 @@ app.post('/login', async(req,res)=>{
 
                 if(useremail.Password === password){
                         res.status(201);
-                        res.send(`<p>Welcome ${useremail.Firstname}, click <a href="#">here</a> to proceed to your dashboard</p>`);
+                        res.send(`<p>Welcome ${useremail.Firstname}, click <a href="/account/${useremail._id}">here</a> to proceed to your dashboard</p>`);
                         res.end();
                 }else{
                         res.send("passwords do not match");
