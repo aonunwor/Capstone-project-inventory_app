@@ -123,7 +123,14 @@ app.post('/login', async(req,res)=>{
         }
 });
 
+//FOR PRODUCTS
+app.get("/:id/new", (req, res)=>{
+        res.status(200);
+        res.render(`products/new`);
+        res.end();
+})
 
+//Start the server
 const PORT = process.env.PORT || 3030;
 app.listen(PORT, ()=>{
         console.log(`APP is listening on port ${PORT}!`);
