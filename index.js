@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 const { Console } = require('console');
 const bodyParser = require('body-parser');
 const User = require(`./models/user`);
+const Items = require(`./models/items`);
 const req = require('express/lib/request');
 const res = require('express/lib/response');
 
@@ -127,6 +128,16 @@ app.post('/login', async(req,res)=>{
 app.get("/:id/new", (req, res)=>{
         res.status(200);
         res.render(`products/new`);
+        res.end();
+})
+
+//To Submit item
+app.post("/items", async(req, res)=>{
+        res.status(201);
+        //console.log(req.body);
+        const newItem = new Items(req.body);
+        await newItem.save();
+        res.send("items added to list");
         res.end();
 })
 

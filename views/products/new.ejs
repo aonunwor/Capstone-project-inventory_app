@@ -12,19 +12,19 @@
         <body>
                 <h1 class="h1 text-center">Add a new product</h1>
                 <div class="col-md-6 container">
-                        <form action="" method="post">
+                        <form action="/items" method="post">
                                 <div class="mb-3">
-                                        <label for="productName" class="form-label">Product Name</label>
-                                        <input type="text" class="form-control" placeholder="Input the product name here" id="productName">
+                                        <label for="productImage" class="form-label">Upload Product Image</label>
+                                        <input type="file" class="form-control" id="productImage" name="itemImage">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="productImage" class="form-label">Upload Product Image</label>
-                                    <input type="file" class="form-control" id="productImage">
+                                    <label for="productName" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" placeholder="Input the product name here" id="productName" name="itemName">
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
                                         <label for="" class="form-label">*</label>
-                                        <select class="form-select">
+                                        <select class="form-select" name="itemCategory">
                                                 <option selected>~ Categories ~</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
@@ -33,11 +33,11 @@
                                     </div>
                                     <div class="col">
                                         <label for="productSize" class="form-label">Size (kg)</label>
-                                        <input type="number" class="form-control" id="productSize">
+                                        <input type="number" class="form-control" id="productSize" name="itemSize">
                                     </div>
                                     <div class="col">
                                         <label for="productQty" class="form-label">Quantity (Qty)</label>
-                                        <input type="number" class="form-control" id="productQty">
+                                        <input type="number" class="form-control" id="productQty" name="itemQty">
                                     </div> 
                                 </div>
 
