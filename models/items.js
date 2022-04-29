@@ -10,11 +10,11 @@ const prodSchema = new Schema(
             },
             itemName:{
                     type: String,
-                    required: true
+                    //required: true
             },
             itemCategory:{
                     type: String,
-                    enum: []
+                    enum: ['One', 'Two', 'Three']
             },
             itemSize:{
                     type: Number

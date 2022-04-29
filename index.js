@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const multer = require('multer');
+//const upload = ({dest: './public/uploads/'});
 const methodOverride = require('method-override');
 const { Console } = require('console');
 const bodyParser = require('body-parser');
@@ -131,15 +133,43 @@ app.get("/:id/new", (req, res)=>{
         res.end();
 })
 
+//Storage
+const Storage = multer.diskStorage({
+        destination: './public/uploads/',
+        filename: (req, file, cb)=>{
+                cb(null, file.originalname);
+        },
+});
+
+const upload = multer({
+        storage: Storage
+}).single('itemImage');
+
 //To Submit item
 app.post("/items", async(req, res)=>{
-        res.status(201);
-        //console.log(req.body);
-        const newItem = new Items(req.body);
-        await newItem.save();
-        res.send("items added to list");
-        res.end();
-})
+        upload(req,res,(err)=>{
+                if(err){
+                        console.log(err)
+                }
+                else{
+                        res.status(201);
+                                console.log(req.file, req.body);
+                                const newItem = new Items({
+                                        Image:{
+                                                data: req.file.filename,
+                                                contentType: 'image/png'
+                                        },
+                                        Name: req.body.itemName,
+                                        Category: req.body.itemCategory,
+                                        Size: req.body.itemSize,
+                                        Quantity: req.body.itemQty
+                        });
+                        const itemAdded = newItem.save();
+                        res.status(201)
+                        res.send("items added to list successfully");
+                        res.end(); 
+                }
+        })})
 
 //Start the server
 const PORT = process.env.PORT || 3030;
