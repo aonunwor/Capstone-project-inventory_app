@@ -126,10 +126,14 @@ app.post('/login', async(req,res)=>{
         }
 });
 
-//FOR PRODUCTS
-app.get("/:id/new", (req, res)=>{
+
+
+//TO INPUT PRODUCTS
+app.get("/:id/new", async(req, res)=>{
         res.status(200);
-        res.render(`products/new`);
+        const { id } = req.params;
+        const eachUser = await User.findById(id);
+        res.render(`products/new`,{ eachUser });
         res.end();
 })
 
@@ -148,28 +152,39 @@ const upload = multer({
 //To Submit item
 app.post("/items", async(req, res)=>{
         upload(req,res,(err)=>{
-                if(err){
+                try{
+                        console.log(req.file, req.body);
+                        const newItem = new Items({
+                                        // Image:{
+                                        //         data: req.file.filename,
+                                        //         contentType: 'image/png'
+                                        // },
+                                        itemStaff: req.body.itemStaff,
+                                        itemName: req.body.itemName,
+                                        itemCategory: req.body.itemCategory,
+                                        itemSize: req.body.itemSize,
+                                        itemQty: req.body.itemQty
+                        });
+                        newItem.save();
+                                res.status(201);
+                                console.log(req.body);
+                                res.send(req.body.itemStaff);
+                                res.end(); 
+                }
+                catch(err){
                         console.log(err)
                 }
-                else{
-                        res.status(201);
-                                console.log(req.file, req.body);
-                                const newItem = new Items({
-                                        Image:{
-                                                data: req.file.filename,
-                                                contentType: 'image/png'
-                                        },
-                                        Name: req.body.itemName,
-                                        Category: req.body.itemCategory,
-                                        Size: req.body.itemSize,
-                                        Quantity: req.body.itemQty
-                        });
-                        const itemAdded = newItem.save();
-                        res.status(201)
-                        res.send("items added to list successfully");
-                        res.end(); 
-                }
-        })})
+        });
+});
+
+
+// TO GET DATABASE
+app.get("/database", (req, res)=>{
+        res.status(200);
+        res.render(`products/database`);
+        res.end();
+});
+
 
 //Start the server
 const PORT = process.env.PORT || 3030;

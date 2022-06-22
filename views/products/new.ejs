@@ -10,9 +10,15 @@
                 <title>Purchase | Add new product</title>
         </head>
         <body>
-                <h1 class="h1 text-center">Add a new product</h1>
+                <h1 class="h1 text-center">Hello <%= eachUser.Firstname%> you can now add a new product</h1>
                 <div class="col-md-6 container">
                         <form action="/items" method="post" enctype="multipart/form-data">
+
+                                <div class="mb-3">
+                                    <label for="Staff" class="form-label">User Name</label>
+                                    <input type="text" class="form-control" value="<%= eachUser.Firstname %> <%= eachUser.Lastname %>" id="Staff" name="itemStaff" readonly>
+                                </div>
+
                                 <div class="mb-3">
                                         <label for="productImage" class="form-label">Upload Product Image</label>
                                         <input type="file" class="form-control" id="productImage" name="itemImage">
@@ -25,10 +31,10 @@
                                     <div class="col">
                                         <label for="" class="form-label">*</label>
                                         <select class="form-select" name="itemCategory">
-                                                <option selected>~ Categories ~</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option> 
+                                            <option selected>~ Categories ~</option>
+                                            <option value="One">One</option>
+                                            <option value="Two">Two</option>
+                                            <option value="Three">Three</option> 
                                         </select>
                                     </div>
                                     <div class="col">

@@ -4,24 +4,27 @@ const { Schema } = mongoose;
 //create a schema
 const prodSchema = new Schema(
     {
-            itemImage:{
+                itemStaff:{
+                        type: Schema.Types.Mixed
+                },
+                itemImage:{
                     data: Buffer,
                     contentType: String
-            },
-            itemName:{
-                    type: String,
-                    //required: true
-            },
-            itemCategory:{
-                    type: String,
-                    enum: ['One', 'Two', 'Three']
-            },
-            itemSize:{
-                    type: Number
-            },
-            itemQty:{
-                type:Number
-            }
+                },
+                itemName:{
+                        type: String,
+                        //required: true
+                },
+                itemCategory:{
+                        type: String,
+                        enum: ['One', 'Two', 'Three']
+                },
+                itemSize:{
+                        type: Number
+                },
+                itemQty:{
+                        type:Number
+                }
 
     },
     {
