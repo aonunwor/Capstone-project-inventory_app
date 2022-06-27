@@ -7,6 +7,9 @@ const prodSchema = new Schema(
                 itemStaff:{
                         type: Schema.Types.Mixed
                 },
+                staffId:{
+                        type: Schema.Types.Mixed
+                },
                 itemImage:{
                     data: Buffer,
                     contentType: String

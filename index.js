@@ -160,6 +160,7 @@ app.post("/items", async(req, res)=>{
                                         //         contentType: 'image/png'
                                         // },
                                         itemStaff: req.body.itemStaff,
+                                        staffId: req.body.staffId,
                                         itemName: req.body.itemName,
                                         itemCategory: req.body.itemCategory,
                                         itemSize: req.body.itemSize,
@@ -168,7 +169,7 @@ app.post("/items", async(req, res)=>{
                         newItem.save();
                                 res.status(201);
                                 console.log(req.body);
-                                res.send(req.body.itemStaff);
+                                res.send(`<h3>Congratulations${newItem.itemStaff}!!!. Your product ${newItem.itemName}, has been added successfully. <br> Click <a href="/account/${newItem.staffId}">here</a> to proceed</h3>`);
                                 res.end(); 
                 }
                 catch(err){
@@ -179,9 +180,11 @@ app.post("/items", async(req, res)=>{
 
 
 // TO GET DATABASE
-app.get("/database", (req, res)=>{
+app.get("/:staffId/database", async(req, res)=>{
         res.status(200);
-        res.render(`products/database`);
+        const { staffId } = req.params;
+        const eachItems = await Items.findOne({ staffId });
+        res.render(`products/database`, {eachItems});
         res.end();
 });
 
