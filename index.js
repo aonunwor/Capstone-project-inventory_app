@@ -150,7 +150,7 @@ const upload = multer({
 }).single('itemImage');
 
 //To Submit item
-app.post("/items", async(req, res)=>{
+app.post("/database", async(req, res)=>{
         upload(req,res,(err)=>{
                 try{
                         console.log(req.file, req.body);
@@ -180,13 +180,28 @@ app.post("/items", async(req, res)=>{
 
 
 // TO GET DATABASE
-app.get("/:staffId/database", async(req, res)=>{
+app.get("/database", async(req, res)=>{
         res.status(200);
-        const { staffId } = req.params;
-        const eachItems = await Items.findOne({ staffId });
-        res.render(`products/database`, {eachItems});
+        const {itemCategory} = req.query;
+        if (itemCategory){
+                const eachItems = await Items.find({ category });
+                res.render(`products/database`, {eachItems, itemCategory})
+        }else{
+                const eachItems = await Items.find({ })
+                res.render(`products/database`, {eachItems, itemCategory: "ALL"});
+        }
         res.end();
+        
 });
+
+//TO SHOW INDIVIDUAL ITEM
+app.get("/:id/show", async(req,res) => {
+        res.status(200);
+        const { id } = req.params;
+        const eachItem = await Items.findById(id);
+        res.render(`products/show`, {eachItem});
+        res.end();
+})
 
 
 //Start the server

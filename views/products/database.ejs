@@ -15,6 +15,7 @@
                         <h3 class="text-center">View all Products</h3>
                                 <blockquote>Each product is attached with the user who uploaded for identification and sales purposes</blockquote>
                                         <div class="row">
+
                                                 <table class="table table-striped table-hover">
                                                         <thead>
                                                             <tr>
@@ -28,53 +29,25 @@
                                                                     <th scope="col">Qty</th>
                                                                     <th scope="col">To View</th>
                                                             </tr>
-                                                        </thead>            
-                                                        <tbody>
-                                                                <tr>
-                                                                        <td>1</td>
-                                                                        <td scope="row">10:00</td>
-                                                                        <td>983746454v0983ij</td>
-                                                                        <td>Dozie</td>
-                                                                        <td>Shoe</td>
-                                                                        <td>Two</td>
-                                                                        <td>8</td>
-                                                                        <td>4</td>
-                                                                        <td><a href="#">View</a></td>
-                                                                </tr>
-                                                                <% for (let i = 0; i < eachItems.length; i++){ %>
-                                                                <tr>
-                                                                        <td> <%= i %></td>
-                                                                        <td> <%= eachItems.createdAt %></td>
-                                                                        <td> <%= eachItems._id %></td>
-                                                                        <td> <%= eachItems.itemStaff %></td>
-                                                                        <td> <%= eachItems.itemName %></td>
-                                                                        <td> <%= eachItems.itemCategory %></td>
-                                                                        <td> <%= eachItems.itemSize %></td>
-                                                                        <td> <%= eachItems.itemQty %></td>
-                                                                        <td> <a href="#">View</a> </td>
-                                                                </tr>
+                                                        </thead>
+                                                        <ul>
+                                                                <% let i = 0 %>
+                                                                <% for (let eachItem of eachItems) { %>            
+                                                                        <tbody>
+                                                                                <tr>
+                                                                                        <td> <%= i++ %></td>
+                                                                                        <td> <%= eachItem.createdAt %></td>
+                                                                                        <td> <%= eachItem._id %></td>
+                                                                                        <td> <%= eachItem.itemStaff %></td>
+                                                                                        <td> <%= eachItem.itemName %></td>
+                                                                                        <td> <%= eachItem.itemCategory %></td>
+                                                                                        <td> <%= eachItem.itemSize %></td>
+                                                                                        <td> <%= eachItem.itemQty %></td>
+                                                                                        <td> <a href="/<%= eachItem.id %>/show">View</a> </td>
+                                                                                </tr>
+                                                                        </tbody>
                                                                 <% }%>
-                                                           <!-- <tr>
-                                                                    <th scope="row">1</th>
-                                                                    <td>Dozie</td>
-                                                                    <td>Shoe</td>
-                                                                    <td>Two</td>
-                                                                    <td>8</td>
-                                                                    <td>4</td>
-                                                                    <td><a>View</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                    <th scope="row">2</th>
-                                                                    <td>Jacob</td>
-                                                                    <td>Thornton</td>
-                                                                    <td>@fat</td>
-                                                            </tr>
-                                                            <tr>
-                                                                    <th scope="row">3</th>
-                                                                    <td colspan="2">Larry the Bird</td>
-                                                                    <td>@twitter</td>
-                                                            </tr>-->
-                                                        </tbody>
+                                                        </ul>
                                                 </table>
                                         </div>
                                 </div>
