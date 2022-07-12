@@ -11,8 +11,25 @@
         </head>
         <body>
 
-        <h2> <% eachItem.itemName %> Product Show Page | WORKING</h2>
 
+                <div class="container">
+                        <div class="row">
+                                <h6 class="text-end">Uploaded by: <%= eachItem.itemStaff %></h6>
+                                        <h5 class="h5 text-end"> Product id: <%= eachItem._id %></h5>
+                                                <p class="text-end"><a href="#" class="btn btn-success btn-sm">Return to Database</a></p>
+                                                        <ul style="list-style-type: none"><li><b>category:</b><%= eachItem.itemCategory %></li></ul>
+                                                                <h3 class="h3"> <%= eachItem.itemName %></h3>
+                                                                        <img class="img-fluid mt-4" src="" alt="<%= eachItem.itemName %> image soon to be uploaded">
+                                                                                <p><b>Size:</b> <%= eachItem.itemSize%> <b>Qty:</b> <%= eachItem.itemQty %></p>
+                        </div>
+
+                        <form action="/<%= eachItem._id %>/edit" method="GET">
+                                <button type="submit" class="btn btn-success btn-sm">Edit</button>
+                        </form>
+                        <form action=" " method=" " class="mt-3">
+                                <button type="submit" class="btn btn-success btn-sm">Delete</button>
+                        </form>
+                </div>
 
 
 

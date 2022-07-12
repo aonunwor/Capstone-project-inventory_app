@@ -3,14 +3,20 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const fs = require('fs');
 //const upload = ({dest: './public/uploads/'});
 const methodOverride = require('method-override');
 const { Console } = require('console');
 const bodyParser = require('body-parser');
 const User = require(`./models/user`);
 const Items = require(`./models/items`);
+
+require('dotenv/config');
+
 const req = require('express/lib/request');
 const res = require('express/lib/response');
+const { render } = require('express/lib/response');
+const { fstat } = require('fs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
@@ -138,16 +144,14 @@ app.get("/:id/new", async(req, res)=>{
 })
 
 //Storage
-const Storage = multer.diskStorage({
+const storage = multer.diskStorage({
         destination: './public/uploads/',
         filename: (req, file, cb)=>{
-                cb(null, file.originalname);
+                cb(null, file.fieldname + '-' + Date.now());
         },
 });
 
-const upload = multer({
-        storage: Storage
-}).single('itemImage');
+const upload = multer({storage: storage}).single('itemImage');
 
 //To Submit item
 app.post("/database", async(req, res)=>{
@@ -161,6 +165,10 @@ app.post("/database", async(req, res)=>{
                                         // },
                                         itemStaff: req.body.itemStaff,
                                         staffId: req.body.staffId,
+                                        itemImage: {
+                                                data: fs.readFileSync(path.join(__dirname + '/public/uploads/' + req.file.filename)),
+                                                contentType: 'image/png',
+                                        },
                                         itemName: req.body.itemName,
                                         itemCategory: req.body.itemCategory,
                                         itemSize: req.body.itemSize,
@@ -203,6 +211,14 @@ app.get("/:id/show", async(req,res) => {
         res.end();
 })
 
+//TO EDIT INDIVIDUAL ITEM
+app.get("/:id/edit", async(req, res) => {
+        res.status(200);
+        const{ id } = req.params;
+        const eachItem = await Items.findById(id);
+        res.render(`products/edit`, {eachItem});
+        res.end();
+})
 
 //Start the server
 const PORT = process.env.PORT || 3030;
